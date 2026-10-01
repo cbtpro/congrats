@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./page.module.css";
 
 type Category = "里程碑" | "轻量" | "商务";
@@ -120,6 +120,7 @@ const celebrations: Celebration[] = [
 ];
 
 const filters = ["全部", "里程碑", "轻量", "商务"] as const;
+const confettiEmojis = ["🎉", "✨", "🎊", "🌸", "🎈", "💐", "🥳", "🌟", "🎉", "🎊", "🌼", "✨"];
 
 function CelebrationCard({
   celebration,
@@ -185,6 +186,14 @@ export default function Home() {
     useState<(typeof filters)[number]>("全部");
   const [selectedId, setSelectedId] = useState<number | null>(null);
   const [notice, setNotice] = useState("");
+  const [confettiBurst, setConfettiBurst] = useState(0);
+
+  useEffect(() => {
+    if (confettiBurst === 0) return;
+
+    const timeout = window.setTimeout(() => setConfettiBurst(0), 2800);
+    return () => window.clearTimeout(timeout);
+  }, [confettiBurst]);
 
   const visibleCelebrations =
     activeFilter === "全部"
@@ -336,6 +345,7 @@ export default function Home() {
               selected={selectedId === celebration.id}
               onSelect={() => {
                 setSelectedId(celebration.id);
+                setConfettiBurst((burst) => burst + 1);
                 setNotice(`已选择「${celebration.name}」`);
                 window.setTimeout(() => setNotice(""), 2400);
               }}
@@ -357,6 +367,15 @@ export default function Home() {
       {notice && (
         <div className={styles.toast} role="status">
           <span>✓</span> {notice}
+        </div>
+      )}
+      {confettiBurst > 0 && (
+        <div key={confettiBurst} className={styles.confettiLayer} aria-hidden="true">
+          {confettiEmojis.map((emoji, index) => (
+            <span className={styles.confettiPiece} key={`${emoji}-${index}`}>
+              {emoji}
+            </span>
+          ))}
         </div>
       )}
     </main>
