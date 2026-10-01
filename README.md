@@ -5,8 +5,8 @@
 ## 本地开发
 
 ```bash
-npm ci
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 在浏览器中打开 [http://localhost:3000](http://localhost:3000)。
@@ -17,4 +17,4 @@ npm run dev
 
 首次部署前，请在仓库的 **Settings → Pages → Build and deployment** 中将 **Source** 设为 **GitHub Actions**。部署成功后，项目站点地址为 `https://cbtpro.github.io/congrats/`。
 
-工作流会安装依赖、运行 lint、生成 Next.js 静态导出，并将 `out` 目录部署到 GitHub Pages。GitHub Actions 构建会自动使用仓库名设置项目站点子路径；本地开发仍使用根路径。
+项目使用 pnpm 管理依赖，并在 GitHub Actions 中缓存 pnpm store、使用锁文件安装依赖、运行 lint 和 Next.js 静态构建，再将 `out` 目录部署到 GitHub Pages。GitHub Actions 构建会自动使用仓库名设置项目站点子路径；本地开发仍使用根路径。
