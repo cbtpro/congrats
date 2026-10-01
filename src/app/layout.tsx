@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "恭喜 — 为每一次成功认真庆祝",
-  description: "10 款精心设计的成功祝贺组件，为每一种好消息准备。",
+  title: "好彩头 — 自定义物理庆祝效果实验室",
+  description: "组合彩纸、飞机、气球、鸽子和庆祝声音，自定义物理参数，庆祝每一个成功时刻。",
 };
 
 export default function RootLayout({

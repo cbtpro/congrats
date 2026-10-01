@@ -1,6 +1,8 @@
 # 恭喜
 
-一个使用 Next.js 构建的成功祝贺组件展示页，包含 10 款可筛选、可选择并可复制文案的组件。
+一个使用 Next.js 构建的业务成功庆祝效果实验室，展示成就完成、目标达成、下单成功和秒杀成功场景。用户可以组合两侧彩纸礼炮、飞机撒彩纸、气球升空等演出，选择配色、调整重力、风力、阻力、速度和粒子数量，并按需开启真实录制的欢呼、掌声和庆祝人群口哨音效；效果组合不受固定数量限制。
+
+飞机 SVG 取自 [Twemoji](https://github.com/jdecked/twemoji) 图形库并经格式整理，按 [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) 许可使用；气球由 Canvas 动态绘制。欢呼、掌声和庆祝人群口哨为 Freesound 上标注 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) 的 MP3 试听文件。完整来源与许可信息分别见 `public/celebration-assets/ATTRIBUTION.md` 和 `public/sounds/ATTRIBUTION.md`。
 
 ## 本地开发
 
