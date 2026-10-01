@@ -372,7 +372,14 @@ export default function Home() {
       {confettiBurst > 0 && (
         <div key={confettiBurst} className={styles.confettiLayer} aria-hidden="true">
           {confettiEmojis.map((emoji, index) => (
-            <span className={styles.confettiPiece} key={`${emoji}-${index}`}>
+            <span
+              className={`${styles.confettiPiece} ${
+                index % 2 === 0
+                  ? styles.confettiFromLeft
+                  : styles.confettiFromRight
+              }`}
+              key={`${emoji}-${index}`}
+            >
               {emoji}
             </span>
           ))}
