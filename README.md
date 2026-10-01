@@ -1,36 +1,20 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 恭喜
 
-## Getting Started
+一个使用 Next.js 构建的成功祝贺组件展示页，包含 10 款可筛选、可选择并可复制文案的组件。
 
-First, run the development server:
+## 本地开发
 
 ```bash
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+在浏览器中打开 [http://localhost:3000](http://localhost:3000)。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## GitHub Pages 部署
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+仓库已配置 GitHub Actions 自动部署。将更改推送到 `main` 分支，或在仓库的 **Actions** 页面手动运行 **Deploy to GitHub Pages** 工作流，即可构建并发布静态站点。
 
-## Learn More
+首次部署前，请在仓库的 **Settings → Pages → Build and deployment** 中将 **Source** 设为 **GitHub Actions**。部署成功后，项目站点地址为 `https://cbtpro.github.io/congrats/`。
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+工作流会安装依赖、运行 lint、生成 Next.js 静态导出，并将 `out` 目录部署到 GitHub Pages。GitHub Actions 构建会自动使用仓库名设置项目站点子路径；本地开发仍使用根路径。
