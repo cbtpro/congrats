@@ -9,8 +9,8 @@
 }
 
 .confettiCanvas {
-  position: fixed;
-  z-index: 20;
+  position: absolute;
+  z-index: 3;
   inset: 0;
   width: 100%;
   height: 100%;

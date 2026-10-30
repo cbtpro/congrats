@@ -189,10 +189,10 @@ function CelebrationCanvas({
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const settings = physicsRef.current;
 
-    let width = window.innerWidth;
-    let height = window.innerHeight;
+    let width = 0;
+    let height = 0;
+    let scale = 1;
     const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-    const scale = Math.max(0.72, Math.min(width / 1440, 1.35));
     const particles: Particle[] = [];
     const actors: FlyingActor[] = [];
     const physicsEngine = new CelebrationPhysicsEngine();
@@ -206,12 +206,13 @@ function CelebrationCanvas({
     const random = seededRandom(Date.now() + burstKey * 7919);
 
     const resize = () => {
-      width = window.innerWidth;
-      height = window.innerHeight;
+      const bounds = canvas.getBoundingClientRect();
+      if (!bounds.width || !bounds.height) return;
+      width = bounds.width;
+      height = bounds.height;
+      scale = Math.max(0.6, Math.min(width / 1080, 1.1));
       canvas.width = Math.round(width * pixelRatio);
       canvas.height = Math.round(height * pixelRatio);
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
       context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
     };
 
@@ -515,7 +516,12 @@ function CelebrationCanvas({
     };
 
     resize();
-    window.addEventListener("resize", resize);
+    const resizeObserver = new ResizeObserver(() => resize());
+    resizeObserver.observe(canvas);
+    if (!width || !height) {
+      resizeObserver.disconnect();
+      return;
+    }
     if (modes.includes("confetti")) {
       launchConfetti(0);
       timers.push(window.setTimeout(() => launchConfetti(1), 120));
@@ -529,7 +535,7 @@ function CelebrationCanvas({
     animationFrame = window.requestAnimationFrame(draw);
 
     return () => {
-      window.removeEventListener("resize", resize);
+      resizeObserver.disconnect();
       window.cancelAnimationFrame(animationFrame);
       timers.forEach(window.clearTimeout);
       context.clearRect(0, 0, width, height);
@@ -657,12 +663,6 @@ export default function Home() {
 
   return (
     <main className={styles.page}>
-      <CelebrationCanvas
-        burstKey={burstKey}
-        modes={modes}
-        palette={palette}
-        physics={physics}
-      />
       <header className={styles.header}>
         <a href="#" className={styles.brand} aria-label="恭喜效果实验室首页">
           <span className={styles.brandSymbol}>✳</span>
@@ -748,6 +748,13 @@ export default function Home() {
               <span aria-hidden="true">↻</span> 播放庆祝效果
             </button>
           </div>
+
+          <CelebrationCanvas
+            burstKey={burstKey}
+            modes={modes}
+            palette={palette}
+            physics={physics}
+          />
         </div>
       </section>
 
